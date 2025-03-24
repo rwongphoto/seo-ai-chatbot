@@ -1,11 +1,12 @@
 import streamlit as st
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain_qdrant import Qdrant  # Corrected import
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.chat_models import ChatOpenAI
+from langchain.vectorstores import Qdrant  # Updated import path
 from qdrant_client import QdrantClient
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.history_aware_retriever import create_history_aware_retriever
-from langchain.chains import create_retrieval_chain  # Corrected import
+from langchain.chains import create_retrieval_chain
 import os
 
 # Inject custom CSS to reduce spacing between elements
@@ -27,8 +28,11 @@ st.markdown(
 def setup_retrieval_qa_chain(qdrant_url, qdrant_api_key, openai_api_key, collection_name):
     """Sets up and returns the RetrievalQA chain."""
     try:
+        # Instantiate embeddings using the updated import
         embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
         client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
+        
+        # Use embeddings in creating the Qdrant vector store
         vectorstore = Qdrant(client=client, collection_name=collection_name, embeddings=embeddings)
         retriever = vectorstore.as_retriever()
 
@@ -49,7 +53,7 @@ def setup_retrieval_qa_chain(qdrant_url, qdrant_api_key, openai_api_key, collect
         ])
         document_chain = create_stuff_documents_chain(llm, prompt)
 
-        # Use create_retrieval_chain
+        # Use create_retrieval_chain to build the final chain
         qa_chain = create_retrieval_chain(history_aware_retriever, document_chain)
 
         st.success("RetrievalQA chain created successfully.")
@@ -117,3 +121,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
