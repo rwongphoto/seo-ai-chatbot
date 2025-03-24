@@ -1,4 +1,7 @@
 streamlit
-langchain
 qdrant-client
 openai
+langchain-community
+langchain-openai
+tiktoken
+langchain-qdrant
