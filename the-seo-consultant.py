@@ -16,7 +16,7 @@ def setup_retrieval_qa_chain(qdrant_url, qdrant_api_key, openai_api_key, collect
         vectorstore = Qdrant(client=client, collection_name=collection_name, embeddings=embeddings)
         retriever = vectorstore.as_retriever()
 
-        llm = ChatOpenAI(temperature=0, model="gpt-4", openai_api_key=openai_api_key)
+        llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo", openai_api_key=openai_api_key)
 
         # Create a chain that remembers the chat history
         retriever_prompt = ChatPromptTemplate.from_messages([
