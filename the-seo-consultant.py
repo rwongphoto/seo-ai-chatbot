@@ -51,7 +51,7 @@ def main():
     qdrant_url = os.getenv("QDRANT_CLOUD_URL")
     qdrant_api_key = os.getenv("QDRANT_CLOUD_API_KEY")
     # Retrieve the collection name from secrets to avoid public display
-    collection_name = os.getenv["QDRANT_COLLECTION_NAME"]
+    collection_name = "my_documents"
 
     # --- Chat Interface ---
     # Initialize chat history and chain outside the input block
