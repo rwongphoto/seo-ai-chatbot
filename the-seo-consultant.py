@@ -47,9 +47,9 @@ def main():
     st.title("How can I answer your SEO or marketing questions?")
 
     # --- Load Secrets ---
-    openai_api_key = os.getenv["OPENAI_API_KEY"]
-    qdrant_url = os.getenv["QDRANT_CLOUD_URL"]
-    qdrant_api_key = os.getenv["QDRANT_CLOUD_API_KEY"]
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    qdrant_url = os.getenv("QDRANT_CLOUD_URL")
+    qdrant_api_key = os.getenv("QDRANT_CLOUD_API_KEY")
     # Retrieve the collection name from secrets to avoid public display
     collection_name = st.secrets["QDRANT_COLLECTION_NAME"]
 
